@@ -43,7 +43,6 @@ if __name__ == '__main__':
     dataset = ['epitope', 'aslbu', 'gene', 'reuters', 'pioneer', 'context', 'robot', 'auslan2', 'epitope', 'skating', 'unix', 'question']
     for i in dataset:
         list_i_length = []
-        # 统计各数据集中序列的长度
         db, data_label, itemset, max_sequence_length = datainput('dataset/{}.txt'.format(i))    
         for j in db:
             list_i_length.append(len(j))
