@@ -48,7 +48,6 @@ def relative_risk_p(label, hit_index, label_size,lebel_set):
     
     # 2. using one vs rest to calculate the relative risk index
     contingency_table = np.zeros((2, 2))
-    # 每个数字+0.5，防止出现0
     contingency_table[0][0] = 0.1
     contingency_table[0][1] = 0.1
     contingency_table[1][0] = 0.1
@@ -188,7 +187,6 @@ def odd_p(label, hit_index, label_size,lebel_set):
     
     # 2. using one vs rest to calculate the relative risk index
     contingency_table = np.zeros((2, 2))
-    # 每个数字+0.5，防止出现0
     contingency_table[0][0] = 0.1
     contingency_table[0][1] = 0.1
     contingency_table[1][0] = 0.1
