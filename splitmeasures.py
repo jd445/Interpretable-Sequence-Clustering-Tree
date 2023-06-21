@@ -44,7 +44,6 @@ def relative_risk_p(label, hit_index, label_size,lebel_set):
     show_ratio = np.array(show_ratio)
     majority_class = list(lebel_set)[np.argmax(show_ratio)]
 
-
     
     # 2. using one vs rest to calculate the relative risk index
     contingency_table = np.zeros((2, 2))
