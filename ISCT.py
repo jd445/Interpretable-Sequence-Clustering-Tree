@@ -299,6 +299,7 @@ if __name__ == '__main__':
     dataset = ['activity', 'aslbu', 'auslan2', 'context', 'epitope', 'pioneer',
                'question', 'reuters', 'robot', 'skating', 'unix', 'webkb', 'news']
     # dataset = ['gene']
+    # when using pca, it may have little difference when project the featrue into 2-d or 3-d.
     tree_results = []
 
     for data in dataset:
