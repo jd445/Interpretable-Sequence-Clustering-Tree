@@ -284,9 +284,8 @@ class TreeCluster():
 
             id_node = str(id(node))
             if node.left.pattern is None and node.right.pattern is None:
-                print("good")
                 # create a node
-                graph.node(str(id_node), label=str(node.pattern), shape="box")
+                graph.node(str(id_node), label="Pattern:\n" + str(node.pattern), shape="box")
                 # create two ouput node: cluster_num
                 graph.node(str(id(node.left)), label="Cluster " + str(cluster_total) + '\nHit:' + str(len(node.left.sequential_data)))
                 cluster_total = cluster_total + 1
@@ -298,7 +297,7 @@ class TreeCluster():
                 return
             else:
                 # create a node
-                graph.node(str(id_node), label=str(node.pattern), shape="box")
+                graph.node(str(id_node), label="Pattern:\n" + str(node.pattern), shape="box")
                 # create two edges
                 graph.edge(str(id_node), str(id(node.left)), shape="box")
                 graph.edge(str(id_node), str(id(node.right)), shape="box")
@@ -306,6 +305,9 @@ class TreeCluster():
                 add_nodes(node.left)
                 add_nodes(node.right)
         add_nodes(root)
+        # add the title at the top of the graph, bold and bigger font
+        graph.attr(label="Clustering Tree for " + self.datasetname + "\n\n", labelloc="t", fontsize="20", fontname="bold")
+        # save the graph as pdf
         graph.render(filename=filename, format=format)
 
 def measure_performance(data_label, y_pred):
@@ -352,7 +354,7 @@ if __name__ == '__main__':
         tree_dict = {'dataset': data, 'purity': 0,
                      'nmi': 0, 'f1': 0, 'cluster': 0}
 
-        n = 10
+        n = 1
         for i in range(n):
             db, data_label, itemset, pattern_sequence_length = datainput(
                 'dataset/{}.txt'.format(data))
