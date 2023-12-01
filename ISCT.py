@@ -8,7 +8,7 @@ from prefixspan import PrefixSpan
 import pandas as pd
 from datainpute import datainput
 from splitmeasures import GiniIndex, relative_risk_index, odd, gain_ratio, relative_risk_p, odd_p
-
+from graphviz import Digraph
 
 def isSubsequence(s: str, t: str) -> bool:
     if len(s) == 0:
