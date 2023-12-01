@@ -204,6 +204,7 @@ class TreeCluster():
                     final_resut.append(sequence_label[j][1])
                     break
         print("final result: ", len(set(final_resut)))
+        self.visualize_tree(root, filename=self.datasetname)
         return final_resut
 
     def built_tree(self, node):
@@ -261,7 +262,51 @@ class TreeCluster():
         else:
             self.find_leaf(node.left, leaf_nodes)
             self.find_leaf(node.right, leaf_nodes)
+            
+    def visualize_tree(self, root, filename="tree", format="pdf"):
+        if root is None:
+            return
+        print("Visualizing tree...")
+        graph = Digraph(comment="Decision Tree")
 
+
+        node_id_dict = {}
+        cluster_total = 1
+
+        def add_nodes(node, parent_id=None):
+            nonlocal cluster_total
+            if node.pattern is None:
+                # change the label
+                node_id = str(id(node))
+                graph.node(str(id(node)), label="Cluster " + str(cluster_total) + '\nHit:' + str(len(node.sequential_data)))
+                cluster_total = cluster_total + 1
+                return
+
+            id_node = str(id(node))
+            if node.left.pattern is None and node.right.pattern is None:
+                print("good")
+                # create a node
+                graph.node(str(id_node), label=str(node.pattern), shape="box")
+                # create two ouput node: cluster_num
+                graph.node(str(id(node.left)), label="Cluster " + str(cluster_total) + '\nHit:' + str(len(node.left.sequential_data)))
+                cluster_total = cluster_total + 1
+                graph.node(str(id(node.right)), label="Cluster " + str(cluster_total) + '\nHit:' + str(len(node.right.sequential_data)))
+                cluster_total = cluster_total + 1
+                # create two edges
+                graph.edge(str(id_node), str(id(node.left)))
+                graph.edge(str(id_node), str(id(node.right)))
+                return
+            else:
+                # create a node
+                graph.node(str(id_node), label=str(node.pattern), shape="box")
+                # create two edges
+                graph.edge(str(id_node), str(id(node.left)), shape="box")
+                graph.edge(str(id_node), str(id(node.right)), shape="box")
+                # add nodes recursively
+                add_nodes(node.left)
+                add_nodes(node.right)
+        add_nodes(root)
+        graph.render(filename=filename, format=format)
 
 def measure_performance(data_label, y_pred):
 
