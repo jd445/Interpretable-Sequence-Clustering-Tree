@@ -3,13 +3,13 @@
 
 
 ## Running
-1. First, it is compile the cpp ($make$) file on your linux in order to generate the fast Random Projection Generator.
+1. First, it is to compile the cpp (use the command $make$) file on your Linux in order to generate the fast Random Projection Generator.
 2. Run ISCT to get the clustering results
 
-We recommend to use pypy, which may give exponential speedups on larger datasets
+We recommend using Pypy, which may give exponential speedups on larger datasets
 
 ## Dependencies
-- Python 3.9.16 (pypy)
+- Python 3.9.16 (Pypy)
 - NumPy 1.24.3
 - Scikit-learn 1.2.2
 - Pandas 2.0.1
