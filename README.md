@@ -1,4 +1,4 @@
-# Interpretable-Sequence-Clustering-Tree
+<img width="408" alt="image" src="https://github.com/jd445/Interpretable-Sequence-Clustering-Tree/assets/65555729/9ecef74b-b562-416a-be8d-60a882daa1b0"># Interpretable-Sequence-Clustering-Tree
 
 
 
@@ -14,3 +14,9 @@ We recommend using Pypy, which may give exponential speedups on larger datasets
 - Scikit-learn 1.2.2
 - Pandas 2.0.1
 - Prefixspan 0.5.2
+
+
+## Visualization
+
+ISCT could provide you with a highly concise and short clustering tree, taking poineer as example:
+<img width="408" alt="image" src="https://github.com/jd445/Interpretable-Sequence-Clustering-Tree/assets/65555729/5a0a465f-0d7d-4d5c-a149-9ceb927abed9">
