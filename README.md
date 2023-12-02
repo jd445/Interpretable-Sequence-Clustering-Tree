@@ -1,4 +1,4 @@
-<img width="408" alt="image" src="https://github.com/jd445/Interpretable-Sequence-Clustering-Tree/assets/65555729/9ecef74b-b562-416a-be8d-60a882daa1b0"># Interpretable-Sequence-Clustering-Tree
+# Interpretable-Sequence-Clustering-Tree
 
 
 
