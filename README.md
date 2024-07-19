@@ -8,6 +8,14 @@
 
 We recommend using Pypy, which may give exponential speedups on larger datasets
 
+We added the tree structure visualization, to use it on linux please first 
+
+sudo apt-get install graphviz
+export PATH=$PATH:/usr/local/bin
+source ~/.bashrc
+
+
+
 ## Dependencies
 - Python 3.9.16 (Pypy)
 - NumPy 1.24.3
