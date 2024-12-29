@@ -1,6 +1,6 @@
 # Interpretable-Sequence-Clustering-Tree
 
-
+Source Code for Interpretable sequence clustering https://www.sciencedirect.com/science/article/pii/S0020025524013677
 
 ## Running
 1. First, compile the cpp file on your Linux in order to generate the fast Random Projection Generator.
