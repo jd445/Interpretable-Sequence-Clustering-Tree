@@ -1,0 +1,20 @@
+// Decision Tree
+digraph {
+	126068138284320 [label="Pattern:
+('11', '12')" shape=box]
+	126068138284320 -> 126068189947776 [shape=box]
+	126068138284320 -> 126068130949040 [shape=box]
+	126068189947776 [label="Pattern:
+('107', '108', '114')" shape=box]
+	126068137304928 [label="Cluster 1
+Hit:101"]
+	126068130944864 [label="Cluster 2
+Hit:43"]
+	126068189947776 -> 126068137304928
+	126068189947776 -> 126068130944864
+	126068130949040 [label="Cluster 3
+Hit:16"]
+	fontname=bold fontsize=20 label="Clustering Tree for pioneer
+
+" labelloc=t
+}
