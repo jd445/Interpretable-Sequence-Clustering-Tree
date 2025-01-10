@@ -1,5 +1,6 @@
 import random
-import threading
+from multiprocessing import Pool, cpu_count
+from tqdm import tqdm
 
 
 class RandomProjection:
@@ -61,44 +62,53 @@ class RandomProjection:
 
     def generate_feature_vector(self, features):
         """
-        Generate the feature vector for all sequences using multithreading.
+        Generate the feature vector for all sequences using multiprocessing.
         """
-        num_of_threads = 8  # Number of threads
-        num_of_sequences = len(self.seqs)
-        feature_vector = [[0] * len(features) for _ in range(num_of_sequences)]
-        threads = []
+        num_of_processes = min(cpu_count(), len(self.seqs))  # Number of processes
+        sequence_chunks = self.split_sequences(num_of_processes)  # Split sequences into chunks
 
-        # Split the sequences into chunks for each thread
-        sequences_per_thread = num_of_sequences // num_of_threads
-        start = 0
+        # Prepare arguments for each process
+        args = [(chunk, features) for chunk in sequence_chunks]
 
-        for i in range(num_of_threads):
-            end = start + sequences_per_thread
-            if i == num_of_threads - 1:  # Handle the remaining sequences in the last thread
-                end = num_of_sequences
+        # Use a multiprocessing pool to process each chunk
+        with Pool(num_of_processes) as pool:
+            # Use tqdm to track progress
+            with tqdm(total=len(self.seqs), desc="Feature Vector Calculation") as pbar:
+                results = []
+                for result in pool.imap(self.generate_feature_vector_chunk, args):
+                    results.append(result)
+                    pbar.update(len(result))  # Update progress bar based on chunk size
 
-            # Create and start a thread
-            thread = threading.Thread(
-                target=self.generate_feature_vector_thread,
-                args=(start, end, features, feature_vector),
-            )
-            threads.append(thread)
-            thread.start()
-            start = end
+        # Merge results from all processes
+        feature_vector = [vector for chunk in results for vector in chunk]
+        return feature_vector
 
-        # Wait for all threads to finish
-        for thread in threads:
-            thread.join()
+    @staticmethod
+    def generate_feature_vector_chunk(args):
+        """
+        Worker function to compute feature vector for a chunk of sequences.
+        """
+        chunk, features = args
+        feature_vector = []
+
+        for seq in chunk:
+            vector = []
+            for feature in features:
+                similarity = RandomProjection.longest_common_substring_similarity(seq, feature)
+                vector.append(similarity)
+            feature_vector.append(vector)
 
         return feature_vector
 
-    def generate_feature_vector_thread(self, start, end, features, feature_vector):
+    def split_sequences(self, num_of_chunks):
         """
-        Threaded function to compute feature vector.
+        Split self.seqs into num_of_chunks parts.
         """
-        for i in range(start, end):
-            for j, feature in enumerate(features):
-                feature_vector[i][j] = self.longest_common_substring_similarity(self.seqs[i], feature)
+        chunk_size = len(self.seqs) // num_of_chunks
+        chunks = [self.seqs[i * chunk_size:(i + 1) * chunk_size] for i in range(num_of_chunks - 1)]
+        chunks.append(self.seqs[(num_of_chunks - 1) * chunk_size:])  # Add remaining sequences to the last chunk
+        return chunks
+
 
 '''
 # Example usage

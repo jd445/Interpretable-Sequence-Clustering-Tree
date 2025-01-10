@@ -3,10 +3,6 @@
 Source Code for Interpretable sequence clustering https://www.sciencedirect.com/science/article/pii/S0020025524013677
 
 ## Running
-1. First, compile the cpp file on your Linux in order to generate the fast Random Projection Generator.
-2. Run ISCT to get the clustering results
-
-We recommend using Pypy, which may give exponential speedups on larger datasets
 
 We added the tree structure visualization, to use it on linux please first 
 
@@ -15,6 +11,18 @@ sudo apt-get install graphviz
 export PATH=$PATH:/usr/local/bin
 source ~/.bashrc
 ```
+We recommend using Pypy, which may give exponential speedups on larger datasets
+
+### For Python version
+Just run ISCT_py.py for running the code
+
+### For CPP version
+
+1. First, compile the cpp file on your Linux in order to generate the fast Random Projection Generator.
+2. Run ISCT_cpp.py to get the clustering results
+
+
+
 
 
 ## Dependencies
