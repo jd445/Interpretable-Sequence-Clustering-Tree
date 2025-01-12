@@ -2,7 +2,10 @@
 
 Source Code for Interpretable sequence clustering https://www.sciencedirect.com/science/article/pii/S0020025524013677
 
+
+
 ## Running
+
 
 We added the tree structure visualization, to use it on linux please first 
 
@@ -13,13 +16,37 @@ source ~/.bashrc
 ```
 We recommend using Pypy, which may give exponential speedups on larger datasets
 
-### For Python version
-Just run ISCT_py.py for running the code
+## Usage
 
-### For CPP version
+### Random Projection on Python version
+
+```
+pip install ISCT
+```
+
+
+<!-- code -->
+```python
+
+from ISCT import ISCT
+sequences = [
+    ['a', 'g', 't', 't', 'c'], 
+    ['a', 't', 'g', 'g', 't', 'u', 't'], 
+    ['a', 'c', 't', 'u', 'u', 'a', 'a'], 
+    ['a', 'c', 'a', 'u', 'a', 't', 'c', 't'], 
+    ['a', 'g', 'g', 'c', 'a', 'a', 'c'], 
+    ['a', 'c', 'g', 'g', 'c', 'c', 'a', 'a']]
+isct = ISCT(num_clusters = 3, visulization_name = 'test', min_sample=2) # if visulization_name is provided, it generates the "test.pdf".
+y_pred = isct.fit(sequences)
+print(y_pred)
+```
+
+
+<!-- 
+### Random Projection  CPP version
 
 1. First, compile the cpp file on your Linux in order to generate the fast Random Projection Generator.
-2. Run ISCT_cpp.py to get the clustering results
+2. Run ISCT_cpp.py to get the clustering results -->
 
 
 
